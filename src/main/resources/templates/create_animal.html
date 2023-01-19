@@ -24,7 +24,7 @@
 			<label for="species">Espèce :</label>
 			<select  th:field="*{species}" id="species" />
 				<option selected disabled >Sélectionner une espèce </option>
-				<option th:each="specie : ${species}" th:value="${specie.getId()}" th:text=${specie.getCommunName()} > 
+				<option th:each="specie : ${species}" th:value="${specie.getId()}" th:text=${specie.getCommonName()} > 
 		</div>
 		<div>
 			<input type="submit" class="button" value="Ajouter" />
