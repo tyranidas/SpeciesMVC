@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{/resources/css/main.css}" />
+	<meta charset="utf-8">
+	<title>Liste des Espèces</title>
+</head>
+
+<body>
+	<h1>POUET</h1>
+	<table class="mainTable">
+		<thead>
+			<tr>
+				<th> Nom commun </th>
+				<th> Nom latin </th>
+		</thead>
+		<tbody>
+			<tr th:each="specie : ${species}">
+				<td th:text="${specie.getCommunName()}" />
+				<td th:text="${specie.getLatinName()}" />
+			</tr>
+		</tbody>
+	</table>
+</body>

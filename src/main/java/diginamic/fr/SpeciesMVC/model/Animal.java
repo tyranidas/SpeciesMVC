@@ -81,7 +81,7 @@ public class Animal {
 	}
 
 	public void setSpecies(Species species) {
-		species = species;
+		this.species = species;
 	}
 
 	public List<Person> getProp() {
