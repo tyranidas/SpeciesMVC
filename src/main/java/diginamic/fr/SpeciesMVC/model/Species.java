@@ -33,20 +33,20 @@ public class Species {
 		this.id = id;
 	}
 
-	public String getCommunName() {
+	public String getCommonName() {
 		return commonName;
 	}
 
-	public void setCommunName(String common_name) {
-		this.commonName = common_name;
+	public void setCommonName(String commonName) {
+		this.commonName = commonName;
 	}
 
 	public String getLatinName() {
 		return latinName;
 	}
 
-	public void setLatinName(String latin_name) {
-		this.latinName = latin_name;
+	public void setLatinName(String latinName) {
+		this.latinName = latinName;
 	}
 
 	@Override

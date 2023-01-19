@@ -1,1 +1,25 @@
-<h1>une seule Species</h1>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<meta charset="utf-8">
+	<title>Détail d'une Personne</title>
+</head>
+
+<body>
+
+	<form th:object="${species}" th:action="@{/specie}" method="post">
+		<input type="hidden" th:field="*{id}" />
+		<div>
+			<label for="commonName">Nom Commun : </label>
+			<input type="text" th:field="*{commonName}" th:placeholder="${species.getCommonName()}" id="firstname" />
+		</div>
+		<div>
+			<label for="sex">Nom Latin :</label>
+			<input type="text" th:field="*{latinName}" th:placeholder="${species.getLatinName()}" id="lastname" />
+		</div>
+		
+		
+	</form>
+
+</body>

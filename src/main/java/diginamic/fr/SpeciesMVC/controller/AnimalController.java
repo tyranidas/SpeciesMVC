@@ -77,4 +77,11 @@ public class AnimalController {
 	return "redirect:/animal";
 	}
 	
+	@GetMapping("/animal/delete/{id}")
+	public String delete(@PathVariable("id") Integer animalId) {
+	Optional<Animal> animalToDelete = this.animalRepository.findById(animalId);
+	animalToDelete.ifPresent(animal -> this.animalRepository.delete(animal));
+	return "redirect:/animal";
+	}
+	
 }

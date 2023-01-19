@@ -19,11 +19,12 @@
 		</thead>
 		<tbody>
 			<tr th:each="animal : ${animals}">
-				<td th:text="${animal.species?.communName}" />
+				<td th:text="${animal.species?.commonName}" />
 				<td th:text="${animal.name}" />
 				<td th:text="${animal.sex}" />
 				<td th:text="${animal.color}" />
 				<td>   <a th:href="@{'/animal/' + ${animal.id}}">modifier</a> </td>>
+				<td>   <a th:href="@{'/animal/delete/' + ${animal.id}}">supprimer</a> </td>>
 			</tr>
 		</tbody>
 	</table>

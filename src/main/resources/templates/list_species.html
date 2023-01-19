@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="stylesheet" th:href="@{/resources/css/main.css}" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
 	<meta charset="utf-8">
 	<title>Liste des Espèces</title>
 </head>
@@ -16,9 +16,13 @@
 		</thead>
 		<tbody>
 			<tr th:each="specie : ${species}">
-				<td th:text="${specie.getCommunName()}" />
+				<td th:text="${specie.getCommonName()}" />
 				<td th:text="${specie.getLatinName()}" />
+				<td>   <a th:href="@{'/specie/' + ${specie.id}}">modifier</a> </td>>
+				<td>   <a th:href="@{'/specie/delete/' + ${specie.id}}">supprimer</a> </td>>
+			
 			</tr>
 		</tbody>
 	</table>
+		<button type="button" onclick="window.location='/specie/create'">➕ Ajouter une Espèce</button>
 </body>

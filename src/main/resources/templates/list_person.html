@@ -8,6 +8,7 @@
 
 <body>
 	<h1>POUET</h1>
+	
 	<table class="mainTable">
 		<thead>
 			<tr>
@@ -20,7 +21,12 @@
 				<td th:text="${person.getLastname()}" />
 				<td th:text="${person.getFirstname()}" />
 				<td th:text="${person.getAge()}" />
+				<td>   <a th:href="@{'/person/' + ${person.id}}">modifier</a> </td>>
+				<td>   <a th:href="@{'/person/delete/' + ${person.id}}">supprimer</a> </td>>
+			
 			</tr>
 		</tbody>
+	
 	</table>
+		<button type="button" onclick="window.location='/person/create'">➕ Ajouter une Personne</button>
 </body>

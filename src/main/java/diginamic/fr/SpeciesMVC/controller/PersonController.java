@@ -8,8 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import diginamic.fr.SpeciesMVC.model.Animal;
 import diginamic.fr.SpeciesMVC.model.Person;
+import diginamic.fr.SpeciesMVC.model.Species;
+import diginamic.fr.SpeciesMVC.repository.AnimalRepository;
 import diginamic.fr.SpeciesMVC.repository.PersonRepository;
 
 @Controller
@@ -17,6 +21,8 @@ public class PersonController {
 	
 	@Autowired
 	private PersonRepository personRepository;
+	@Autowired
+	private AnimalRepository animalRepository;
 	
 
 	/**
@@ -45,6 +51,8 @@ public class PersonController {
 		Optional<Person> person = personRepository.findById(id);
 		if(person.isPresent()) {
 		model.addAttribute("person", person.get());
+		List<Animal> listPet = (List<Animal>) animalRepository.findAll();
+		model.addAttribute("animals", listPet);
 		return "detail_person";
 		}
 		return "erreur";
@@ -61,5 +69,19 @@ public class PersonController {
 		model.addAttribute("persons", new Person());
 		return "create_person";
 	}
+	@PostMapping("/person")
+	public String createOrUpdate(Person person) {
+		
+	this.personRepository.save(person);
+	return "redirect:/person";
+	}
+	
+	@GetMapping("/person/delete/{id}")
+	public String delete(@PathVariable("id") Integer personID) {
+	Optional<Person> personToDelete = this.personRepository.findById(personID);
+	personToDelete.ifPresent(person -> this.personRepository.delete(person));
+	return "redirect:/person";
+	}
+	
 	
 }

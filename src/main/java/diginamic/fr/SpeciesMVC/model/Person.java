@@ -70,11 +70,11 @@ public class Person {
 		this.lastname = lastname;
 	}
 
-	public Set<Animal> getPet() {
+	public Set<Animal> getAnimals() {
 		return animals;
 	}
 
-	public void setPet(Set<Animal> animals) {
+	public void setAnimals(Set<Animal> animals) {
 		this.animals = animals;
 	}
 
