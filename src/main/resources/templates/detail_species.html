@@ -12,13 +12,16 @@
 		<input type="hidden" th:field="*{id}" />
 		<div>
 			<label for="commonName">Nom Commun : </label>
-			<input type="text" th:field="*{commonName}" th:placeholder="${species.getCommonName()}" id="firstname" />
+			<input type="text" th:field="*{commonName}" th:placeholder="${species.getCommonName()}" id="commonName" />
 		</div>
 		<div>
 			<label for="sex">Nom Latin :</label>
-			<input type="text" th:field="*{latinName}" th:placeholder="${species.getLatinName()}" id="lastname" />
+			<input type="text" th:field="*{latinName}" th:placeholder="${species.getLatinName()}" id="latinName" />
 		</div>
-		
+		<div>
+			<input type="submit" class="button" value="Sauver" />
+			<input type="button" class="button" value="Retour" onclick="window.location='/species'" />
+		</div>
 		
 	</form>
 

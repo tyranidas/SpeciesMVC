@@ -15,23 +15,30 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="animal")
-@Component
 public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(columnDefinition = "varchar(50)")
+	@Column(length = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String color;
 	
-	@Column(columnDefinition = "varchar(50)")
+	@Column(length = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String name;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(length = 50)
+	@NotEmpty
+	@Size(max = 255)
 	private String sex;
 	
 	@ManyToOne

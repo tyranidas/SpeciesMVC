@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import diginamic.fr.SpeciesMVC.model.Person;
 import diginamic.fr.SpeciesMVC.model.Species;
 import diginamic.fr.SpeciesMVC.repository.AnimalRepository;
 import diginamic.fr.SpeciesMVC.repository.SpeciesRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class SpeciesController {
@@ -41,14 +43,16 @@ public class SpeciesController {
 	
 	@GetMapping("specie/create")
 	public String getPersonCreate(Model model) {
-		model.addAttribute("species", new Animal());
+		model.addAttribute("species", new Species());
 		return "create_specie";
 	}
 	
 	@PostMapping("/specie")
-	public String createOrUpdate(Species specie) {
-		
-	this.speciesRepository.save(specie);
+	public String createOrUpdate(@Valid Species species, BindingResult result) {
+		if (result.hasErrors()) {
+			return "create_specie";
+		}
+	this.speciesRepository.save(species);
 	return "redirect:/specie";
 	}
 	

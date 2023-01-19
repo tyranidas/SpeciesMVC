@@ -1,9 +1,5 @@
 package diginamic.fr.SpeciesMVC.model;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-
-import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +10,10 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="person")
@@ -24,12 +24,19 @@ public class Person {
 	private int id;
 	
 	@Column(columnDefinition = "Integer(11)")
+	@Max(120)
+	@Min(0)
 	private Integer age;
 	
-	@Column(columnDefinition = "varchar(50)")
+	
+	@Column(length = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String firstname;
 	
-	@Column(columnDefinition = "varchar(50)")
+	@Column(length = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String lastname;
 	
 	@ManyToMany

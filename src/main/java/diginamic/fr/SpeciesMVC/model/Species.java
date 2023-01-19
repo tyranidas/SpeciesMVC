@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -20,9 +22,13 @@ public class Species {
 	private int id;
 	
 	@Column(name = "common_name",columnDefinition = "varchar(50)")
+	@NotEmpty
+	@Size(max = 50)
 	private String commonName;
 	
 	@Column(name = "latin_name",columnDefinition = "varchar(200)")
+	@NotEmpty
+	@Size(max = 50)
 	private String latinName;
 
 	public int getId() {
