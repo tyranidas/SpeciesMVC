@@ -1,66 +1,54 @@
 package diginamic.fr.SpeciesMVC.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import diginamic.fr.SpeciesMVC.model.Animal;
-import diginamic.fr.SpeciesMVC.model.Person;
 import diginamic.fr.SpeciesMVC.model.Species;
-import diginamic.fr.SpeciesMVC.repository.AnimalRepository;
-import diginamic.fr.SpeciesMVC.repository.SpeciesRepository;
+import diginamic.fr.SpeciesMVC.service.SpeciesService;
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
+@RequestMapping("/rest/species")
 public class SpeciesController {
 	@Autowired
-	private SpeciesRepository speciesRepository;
+	private SpeciesService speciesService;
 	
-	@GetMapping("specie")
-	public String getSpeciesList(Model model) {
-		List<Species> allSpecies = (List<Species>) speciesRepository.findAll();
-		System.out.println(allSpecies.get(0).getCommonName());
-		model.addAttribute("species", allSpecies);
-		return "list_species";
-	}
-	
-	@GetMapping("specie/{id}")
-	public String getPersonbyId(@PathVariable("id") Integer id, Model model) {
-		Optional<Species> species = speciesRepository.findById(id);
-		if(species.isPresent()) {
-		model.addAttribute("species", species.get());
-		return "detail_species";
+	@PostMapping()
+	public Species create(@RequestBody @Valid Species specieToCreate) {
+		if (specieToCreate.getId() != null) {
+			throw new RuntimeException("blabla");
 		}
-		return "erreur";
+		return this.speciesService.create(specieToCreate);
 	}
-	
-	@GetMapping("specie/create")
-	public String getPersonCreate(Model model) {
-		model.addAttribute("species", new Species());
-		return "create_specie";
+	@GetMapping("/{id}")
+	public Species findById(@PathVariable("id") Integer id) {
+		return this.speciesService.findById(id);
 	}
-	
-	@PostMapping("/specie")
-	public String createOrUpdate(@Valid Species species, BindingResult result) {
-		if (result.hasErrors()) {
-			return "create_specie";
+	@GetMapping()
+	public Page<Species> findAllSpecies(@RequestParam("pageNumber")Integer pageNumber) {
+		return  this.speciesService.findAll(PageRequest.of(pageNumber-1, 2));
+	}
+	@PutMapping()
+	public Species update(@RequestBody @Valid Species updatedSpecie) {
+		if (updatedSpecie.getId() == null) {
+			throw new RuntimeException("blabla");
 		}
-	this.speciesRepository.save(species);
-	return "redirect:/specie";
+		return this.speciesService.create(updatedSpecie);
 	}
-	
-	@GetMapping("/specie/delete/{id}")
-	public String delete(@PathVariable("id") Integer specieID) {
-	Optional<Species> personToDelete = this.speciesRepository.findById(specieID);
-	personToDelete.ifPresent(specie -> this.speciesRepository.delete(specie));
-	return "redirect:/specie";
+
+	@DeleteMapping("/{id}")
+	public void deleteSpecie(Integer id) {
+		this.speciesService.deleteSpecieById(id);
 	}
 	
 }

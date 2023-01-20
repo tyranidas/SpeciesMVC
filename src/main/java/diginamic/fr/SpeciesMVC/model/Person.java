@@ -1,6 +1,8 @@
 package diginamic.fr.SpeciesMVC.model;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class Person {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(columnDefinition = "Integer(11)")
 	@Max(120)
@@ -45,7 +47,7 @@ public class Person {
     inverseJoinColumns = @JoinColumn( name = "animals_id", referencedColumnName = "id" ) )
 	Set<Animal> animals ;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

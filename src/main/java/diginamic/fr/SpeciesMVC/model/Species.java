@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Size;
 public class Species {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name = "common_name",columnDefinition = "varchar(50)")
 	@NotEmpty
@@ -31,7 +31,7 @@ public class Species {
 	@Size(max = 50)
 	private String latinName;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

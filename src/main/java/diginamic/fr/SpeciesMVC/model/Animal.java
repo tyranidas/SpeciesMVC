@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(length = 50)
 	@NotEmpty
@@ -45,13 +47,11 @@ public class Animal {
 	@JoinColumn(name = "species_id")   
 	private Species species;
 	
-	@ManyToMany
-	@JoinTable( name = "person_animals",
-    joinColumns = @JoinColumn( name = "animals_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn( name = "person_id", referencedColumnName = "id" ) )
+	@ManyToMany(mappedBy = "animals")
+	@JsonIgnoreProperties("animals")
 	private List<Person> prop = new ArrayList<>();
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
