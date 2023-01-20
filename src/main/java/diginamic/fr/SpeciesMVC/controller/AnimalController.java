@@ -26,6 +26,9 @@ public class AnimalController {
 	
 	@PostMapping()
 	public Animal createAnimal(@RequestBody @Valid Animal animal) {
+		if (animal.getId() != null) {
+			throw new RuntimeException("L'id doit être null");
+		}
 		return animalService.create(animal);
 	}
 	
@@ -39,6 +42,9 @@ public class AnimalController {
 	}
 	@PutMapping()
 	public Animal updateAnimal(@RequestBody @Valid Animal animal) {
+		if (animal.getId() == null) {
+			throw new RuntimeException("Il faut une id valide (à défaut de prétole)");
+		}
 		return this.animalService.update(animal);
 	}
 	@DeleteMapping("/{id}")

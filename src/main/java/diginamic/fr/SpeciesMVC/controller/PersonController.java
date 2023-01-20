@@ -39,7 +39,7 @@ public class PersonController {
 	@PostMapping()
 	public Person create(@RequestBody @Valid Person personToCreate) {
 		if (personToCreate.getId() != null) {
-			throw new RuntimeException("blabla");
+			throw new RuntimeException("L'id doit être null");
 		}
 		return this.personService.create(personToCreate);
 	}
@@ -54,7 +54,7 @@ public class PersonController {
 	@PutMapping()
 	public Person update(@RequestBody @Valid Person updatedPerson) {
 		if (updatedPerson.getId() == null) {
-			throw new RuntimeException("blabla");
+			throw new RuntimeException("Il faut une id valide (à défaut de prétole)");
 		}
 		return this.personService.create(updatedPerson);
 	}

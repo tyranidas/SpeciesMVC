@@ -26,7 +26,7 @@ public class SpeciesController {
 	@PostMapping()
 	public Species create(@RequestBody @Valid Species specieToCreate) {
 		if (specieToCreate.getId() != null) {
-			throw new RuntimeException("blabla");
+			throw new RuntimeException("L'id doit être null");
 		}
 		return this.speciesService.create(specieToCreate);
 	}
@@ -41,7 +41,7 @@ public class SpeciesController {
 	@PutMapping()
 	public Species update(@RequestBody @Valid Species updatedSpecie) {
 		if (updatedSpecie.getId() == null) {
-			throw new RuntimeException("blabla");
+			throw new RuntimeException("Il faut une id valide (à défaut de prétole)");
 		}
 		return this.speciesService.create(updatedSpecie);
 	}
