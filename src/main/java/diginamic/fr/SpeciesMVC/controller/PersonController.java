@@ -54,7 +54,7 @@ public class PersonController {
 	@PutMapping()
 	public Person update(@RequestBody @Valid Person updatedPerson) {
 		if (updatedPerson.getId() == null) {
-			throw new RuntimeException("Il faut une id valide (à défaut de prétole)");
+			throw new RuntimeException("Il faut une id valide (à défaut de pétrole)");
 		}
 		return this.personService.create(updatedPerson);
 	}

@@ -43,7 +43,7 @@ public class AnimalController {
 	@PutMapping()
 	public Animal updateAnimal(@RequestBody @Valid Animal animal) {
 		if (animal.getId() == null) {
-			throw new RuntimeException("Il faut une id valide (à défaut de prétole)");
+			throw new RuntimeException("Il faut une id valide (à défaut de pétrole)");
 		}
 		return this.animalService.update(animal);
 	}
